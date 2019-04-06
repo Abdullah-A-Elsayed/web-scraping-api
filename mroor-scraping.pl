@@ -6,12 +6,19 @@ use utf8;
 use open qw(:std :utf8);
 
 #==================== getting car data ==================================================#
-my $filename = $ARGV[0];
-open(my $fhr, '<:encoding(UTF-8)', $filename);
-my $f_l = <$fhr>; my $s_l = <$fhr>; my $t_l = <$fhr>; my $nums = <$fhr>;
-chomp $f_l ; chomp $s_l ; chomp $t_l ; chomp $nums ;
-# print $f_l ; print $s_l ; print $t_l ; print $nums ;
-close $fhr;
+
+use Encode qw(decode_utf8);
+@ARGV = map { decode_utf8($_, 1) } @ARGV;
+
+my $f_l = $ARGV[0];chomp $f_l; $f_l =~ s/empty_//;
+my $s_l = $ARGV[1];chomp $s_l; $s_l =~ s/empty_//;
+my $t_l = $ARGV[2];chomp $t_l; $t_l =~ s/empty_//;
+my $nums = $ARGV[3];chomp $nums; $nums =~ s/empty_//;
+#print $f_l."\n";
+#print $s_l."\n";
+#print $t_l."\n";
+#print $nums."\n";
+
 #========================================================================================#
 
 #============================== scraping ================================================#
@@ -49,6 +56,8 @@ if ( $whole_report =~ m/<span id="cFinesSummary_lblTotalNew" class="keyword">(.+
 } else{
   print "failed getting car data";
 }
+
+#print $whole_report."\n";
 
 #========================================================================================#
 
