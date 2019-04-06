@@ -18,8 +18,8 @@ $result = `perl mroor-scraping.pl $fl $sl $tl $ns`;
 http_response_code(200);
 echo json_encode([
 	"result" => $result,
-	"fl" => $fl,
-	"sl" => $sl,
-	"tl" => $tl,
-	"ns" => $ns
+	"first_letter" => $fl,
+	"second_letter" => $sl,
+	"third_letter" => $tl,
+	"numbers" => $ns
 ]);
